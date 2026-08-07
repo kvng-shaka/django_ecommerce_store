@@ -23,6 +23,10 @@
             ← Back to Products
         </a>
 
+        <a href="{% url 'cart_detail' %}">
+            🛒 Cart
+        </a>
+
     </header>
 
 
@@ -67,9 +71,9 @@
                     {{ product.stock }} available
                 </p>
 
-                <button type="button">
+                <a href="{% url 'add_to_cart' product.pk %}">
                     Add to Cart
-                </button>
+                </a>
 
             {% else %}
 

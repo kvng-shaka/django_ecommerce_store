@@ -24,6 +24,9 @@ urlpatterns = [
 
     # products
     path('products/', include('products.urls')),
+
+    # cart
+    path('cart/', include('cart.urls')),
     
 ]
 
