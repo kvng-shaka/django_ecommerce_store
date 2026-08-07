@@ -10,6 +10,63 @@
 
     <h1>My Store</h1>
 
+    <form method="GET">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search products..."
+            value="{{ search }}"
+        >
+
+        <select name="category">
+
+            <option value="">
+                All Categories
+            </option>
+
+            {% for item in categories %}
+
+                <option
+                    value="{{ item.name }}"
+                    {% if category == item.name %}selected{% endif %}
+                >
+                    {{ item.name }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+        <input
+            type="number"
+            name="min_price"
+            placeholder="Min price"
+            value="{{ min_price }}"
+            min="0"
+            step="0.01"
+        >
+
+
+        <input
+            type="number"
+            name="max_price"
+            placeholder="Max price"
+            value="{{ max_price }}"
+            min="0"
+            step="0.01"
+        >
+
+        <button type="submit">
+            Filter
+        </button>
+
+        <a href="{% url 'product_list' %}">
+            Clear
+        </a>
+
+    </form>
+
     <p>
         Browse our latest products.
     </p>
@@ -79,6 +136,42 @@
                 </article>
 
             {% endfor %}
+
+            {% if page_obj.has_other_pages %}
+
+                <div class="pagination">
+
+                    {% if page_obj.has_previous %}
+
+                        <a
+                            href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search|urlencode }}{% endif %}{% if category %}&category={{ category|urlencode }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}"
+                        >
+                            ← Previous
+                        </a>
+
+                    {% endif %}
+
+
+                    <span>
+                        Page {{ page_obj.number }}
+                        of
+                        {{ page_obj.paginator.num_pages }}
+                    </span>
+
+
+                    {% if page_obj.has_next %}
+
+                        <a
+                            href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search|urlencode }}{% endif %}{% if category %}&category={{ category|urlencode }}{% endif %}{% if min_price %}&min_price={{ min_price }}{% endif %}{% if max_price %}&max_price={{ max_price }}{% endif %}"
+                        >
+                            Next →
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
 
         </div>
 
