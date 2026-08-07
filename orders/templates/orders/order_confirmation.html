@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Order Confirmed | My Store
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>
+        Order Confirmed 🎉
+    </h1>
+
+
+    <p>
+        Thank you for your order,
+        {{ order.first_name }}!
+    </p>
+
+
+    <p>
+        Your order number is:
+        <strong>
+            #{{ order.id }}
+        </strong>
+    </p>
+
+
+    <h2>
+        Order Summary
+    </h2>
+
+
+    {% for item in order.items.all %}
+
+        <div>
+
+            <h3>
+                {{ item.product.name }}
+            </h3>
+
+            <p>
+                Quantity:
+                {{ item.quantity }}
+            </p>
+
+            <p>
+                Price:
+                ₦{{ item.price }}
+            </p>
+
+            <p>
+                Subtotal:
+                ₦{{ item.get_subtotal }}
+            </p>
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+
+    <h2>
+        Total:
+        ₦{{ order.total }}
+    </h2>
+
+
+    <p>
+        Status:
+        {{ order.get_status_display }}
+    </p>
+
+
+    <a href="{% url 'product_list' %}">
+        Continue Shopping
+    </a>
+
+{% endblock %}

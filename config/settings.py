@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     'products',
     'cart',
+    'accounts',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +61,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +136,9 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/products/'
+LOGOUT_REDIRECT_URL = '/products/'

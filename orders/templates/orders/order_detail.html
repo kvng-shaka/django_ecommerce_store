@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Order #{{ order.id }} | My Store
+{% endblock %}
+
+
+{% block content %}
+
+    <a href="{% url 'order_list' %}">
+        ← Back to My Orders
+    </a>
+
+
+    <h1>
+        Order #{{ order.id }}
+    </h1>
+
+
+    <p>
+        Placed on:
+        {{ order.created_at|date:"M d, Y H:i" }}
+    </p>
+
+
+    <p>
+        Status:
+        <strong>
+            {{ order.get_status_display }}
+        </strong>
+    </p>
+
+
+    <h2>Items</h2>
+
+
+    {% for item in order.items.all %}
+
+        <article>
+
+            <h3>
+                {{ item.product.name }}
+            </h3>
+
+
+            <p>
+                Quantity:
+                {{ item.quantity }}
+            </p>
+
+
+            <p>
+                Price:
+                ₦{{ item.price }}
+            </p>
+
+
+            <p>
+                Subtotal:
+                ₦{{ item.get_subtotal }}
+            </p>
+
+        </article>
+
+        <hr>
+
+    {% endfor %}
+
+
+    <h2>
+        Total:
+        ₦{{ order.total }}
+    </h2>
+
+
+    <h2>
+        Delivery Information
+    </h2>
+
+
+    <p>
+        {{ order.first_name }}
+        {{ order.last_name }}
+    </p>
+
+
+    <p>
+        {{ order.email }}
+    </p>
+
+
+    <p>
+        {{ order.phone }}
+    </p>
+
+
+    <p>
+        {{ order.address }}
+    </p>
+
+
+    <p>
+        {{ order.city }},
+        {{ order.country }}
+    </p>
+
+{% endblock %}

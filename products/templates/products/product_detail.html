@@ -1,99 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>{{ product.name }} | My Store</title>
-
-</head>
+{% extends 'base.html' %}
 
 
-<body>
-
-    <header>
-
-        <a href="{% url 'product_list' %}">
-            ← Back to Products
-        </a>
-
-        <a href="{% url 'cart_detail' %}">
-            🛒 Cart
-        </a>
-
-    </header>
+{% block title %}
+    {{ product.name }} | My Store
+{% endblock %}
 
 
-    <main>
+{% block content %}
 
-        <article>
-
-            {% if product.image %}
-
-                <img
-                    src="{{ product.image.url }}"
-                    alt="{{ product.name }}"
-                    width="400"
-                >
-
-            {% endif %}
+    <a href="{% url 'product_list' %}">
+        ← Back to Products
+    </a>
 
 
-            <p>
-                {{ product.category.name }}
-            </p>
+    <article>
+
+        {% if product.image %}
+
+            <img
+                src="{{ product.image.url }}"
+                alt="{{ product.name }}"
+                width="400"
+            >
+
+        {% endif %}
 
 
-            <h1>
-                {{ product.name }}
-            </h1>
+        <p>
+            {{ product.category.name }}
+        </p>
 
+
+        <h1>
+            {{ product.name }}
+        </h1>
+
+
+        <p>
+            {{ product.description }}
+        </p>
+
+
+        <h2>
+            ₦{{ product.price }}
+        </h2>
+
+
+        {% if product.stock > 0 %}
 
             <p>
-                {{ product.description }}
+                {{ product.stock }} available
             </p>
 
+            <a href="{% url 'add_to_cart' product.pk %}">
+                Add to Cart
+            </a>
 
-            <h2>
-                ₦{{ product.price }}
-            </h2>
+        {% else %}
 
+            <p>
+                Out of stock
+            </p>
 
-            {% if product.stock > 0 %}
+        {% endif %}
 
-                <p>
-                    {{ product.stock }} available
-                </p>
+    </article>
 
-                <a href="{% url 'add_to_cart' product.pk %}">
-                    Add to Cart
-                </a>
-
-            {% else %}
-
-                <p>
-                    Out of stock
-                </p>
-
-                <button
-                    type="button"
-                    disabled
-                >
-                    Out of Stock
-                </button>
-
-            {% endif %}
-
-        </article>
-
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

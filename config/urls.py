@@ -27,6 +27,12 @@ urlpatterns = [
 
     # cart
     path('cart/', include('cart.urls')),
+
+    # accounts
+    path('accounts/', include('accounts.urls')),
+
+    # orders
+    path('orders/', include('orders.urls')),
     
 ]
 

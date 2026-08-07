@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
 
-    <meta charset="UTF-8">
+{% block title %}
+    Your Cart | My Store
+{% endblock %}
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
 
-    <title>Your Cart | My Store</title>
-
-</head>
-
-<body>
-
-    <header>
+{% block content %}
 
         <h1>Your Cart</h1>
 
@@ -24,7 +14,7 @@
             Continue Shopping
         </a>
 
-    </header>
+
 
 
     <main>
@@ -100,9 +90,9 @@
             </h2>
 
 
-            <button type="button">
+            <a href="{% url 'checkout' %}">
                 Checkout
-            </button>
+            </a>
 
 
         {% else %}
@@ -119,6 +109,4 @@
 
     </main>
 
-</body>
-
-</html>
+{% endblock %}

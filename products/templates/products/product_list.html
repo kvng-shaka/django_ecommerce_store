@@ -1,110 +1,93 @@
-x<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>My Store</title>
-
-</head>
+{% extends 'base.html' %}
 
 
-<body>
+{% block title %}
+    Products | My Store
+{% endblock %}
 
-    <header>
 
-        <h1>My Store</h1>
+{% block content %}
+
+    <h1>My Store</h1>
+
+    <p>
+        Browse our latest products.
+    </p>
+
+
+    {% if products %}
+
+        <div>
+
+            {% for product in products %}
+
+                <article>
+
+                    {% if product.image %}
+
+                        <img
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            width="250"
+                        >
+
+                    {% endif %}
+
+
+                    <h2>
+                        {{ product.name }}
+                    </h2>
+
+
+                    <p>
+                        {{ product.description }}
+                    </p>
+
+
+                    <p>
+                        Category:
+                        {{ product.category.name }}
+                    </p>
+
+
+                    <strong>
+                        ₦{{ product.price }}
+                    </strong>
+
+
+                    {% if product.stock > 0 %}
+
+                        <p>
+                            In stock
+                        </p>
+
+                    {% else %}
+
+                        <p>
+                            Out of stock
+                        </p>
+
+                    {% endif %}
+
+
+                    <a
+                        href="{% url 'product_detail' product.pk %}"
+                    >
+                        View Product
+                    </a>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
 
         <p>
-            Browse our latest products.
+            No products available.
         </p>
 
-    </header>
+    {% endif %}
 
-
-    <main>
-
-        {% if products %}
-
-            <div>
-
-                {% for product in products %}
-
-                    <article>
-
-                        {% if product.image %}
-
-                            <img
-                                src="{{ product.image.url }}"
-                                alt="{{ product.name }}"
-                                width="250"
-                            >
-
-                        {% endif %}
-
-
-                        <h2>
-                            {{ product.name }}
-                        </h2>
-
-
-                        <p>
-                            {{ product.description }}
-                        </p>
-
-
-                        <p>
-                            Category:
-                            {{ product.category.name }}
-                        </p>
-
-
-                        <strong>
-                            ₦{{ product.price }}
-                        </strong>
-
-
-                        {% if product.stock > 0 %}
-
-                            <p>
-                                In stock
-                            </p>
-
-                        {% else %}
-
-                            <p>
-                                Out of stock
-                            </p>
-
-                        {% endif %}
-
-
-                        <a href="{% url 'product_detail' product.pk %}">
-                            View Product
-                        </a>
-
-                    </article>
-
-                {% endfor %}
-
-            </div>
-
-        {% else %}
-
-            <p>
-                No products available.
-            </p>
-
-        {% endif %}
-
-    </main>
-
-</body>
-
-</html>
+{% endblock %}

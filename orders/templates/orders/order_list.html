@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    My Orders | My Store
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>My Orders</h1>
+
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+            <article>
+
+                <h2>
+                    Order #{{ order.id }}
+                </h2>
+
+
+                <p>
+                    Date:
+                    {{ order.created_at|date:"M d, Y" }}
+                </p>
+
+
+                <p>
+                    Total:
+                    ₦{{ order.total }}
+                </p>
+
+
+                <p>
+                    Status:
+                    {{ order.get_status_display }}
+                </p>
+
+
+                <a
+                    href="{% url 'order_detail' order.id %}"
+                >
+                    View Order
+                </a>
+
+            </article>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h2>No orders yet</h2>
+
+        <p>
+            You haven't placed any orders yet.
+        </p>
+
+        <a href="{% url 'product_list' %}">
+            Start Shopping
+        </a>
+
+    {% endif %}
+
+{% endblock %}

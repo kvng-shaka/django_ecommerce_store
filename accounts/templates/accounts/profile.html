@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    My Profile | My Store
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>My Profile</h1>
+
+
+    <div>
+        {% if profile.image %}
+
+            <div>
+                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}" width="150">
+            </div>
+
+        {% endif %}
+
+        <h2>
+            {{ profile.user.username }}
+        </h2>
+
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+
+            <h3>Account Information</h3>
+
+            {{ user_form.as_p }}
+
+
+            <h3>Contact Information</h3>
+
+            {{ profile_form.as_p }}
+
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+
+{% endblock %}
