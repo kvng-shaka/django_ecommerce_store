@@ -40,4 +40,5 @@ def product_list(request):
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, id=pk, is_available=True)
-    return render(request, 'products/product_detail.html', {'product': product})
+    reviews = product.reviews.all()
+    return render(request, 'products/product_detail.html', {'product': product, 'reviews': reviews,})

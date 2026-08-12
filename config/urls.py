@@ -35,7 +35,10 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
 
     # wishlist
-    path('wishlist/', include('wishlist.urls'))
+    path('wishlist/', include('wishlist.urls')),
+
+    # reviews
+    path('reviews/', include('reviews.urls')),
     
 ]
 
