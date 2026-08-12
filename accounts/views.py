@@ -18,8 +18,8 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('product_list')
-        else:
-            form = UserCreationForm()
+    else:
+        form = UserCreationForm()
     return render(request, 'accounts/register.html', {'form': form})
 
 

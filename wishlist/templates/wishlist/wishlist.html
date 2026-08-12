@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    My Wishlist
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>My Wishlist ❤️</h1>
+
+        <p>
+            Products you've saved for later.
+        </p>
+
+    </div>
+
+</div>
+
+
+{% if products %}
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+            <div class="product-card">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% endif %}
+
+
+                <div class="product-card-content">
+
+                    <h2>
+                        {{ product.name }}
+                    </h2>
+
+
+                    <p>
+                        {{ product.description|truncatewords:20 }}
+                    </p>
+
+
+                    <strong>
+                        ₦{{ product.price }}
+                    </strong>
+
+
+                    <div class="product-actions">
+
+                        <a
+                            href="{% url 'product_detail' product.pk %}"
+                        >
+                            View Product
+                        </a>
+
+
+                        <a
+                            href="{% url 'remove_from_wishlist' product.pk %}"
+                        >
+                            💔 Remove
+                        </a>
+
+
+                        <a
+                            href="{% url 'add_to_cart' product.pk %}"
+                        >
+                            🛒 Add to Cart
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+{% else %}
+
+    <div class="empty-state">
+
+        <h2>Your wishlist is empty ❤️</h2>
+
+        <p>
+            Save products here so you can find them later.
+        </p>
+
+        <a
+            href="{% url 'product_list' %}"
+            class="btn"
+        >
+            Browse Products
+        </a>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}

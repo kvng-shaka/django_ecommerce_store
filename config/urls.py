@@ -33,6 +33,9 @@ urlpatterns = [
 
     # orders
     path('orders/', include('orders.urls')),
+
+    # wishlist
+    path('wishlist/', include('wishlist.urls'))
     
 ]
 

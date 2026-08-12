@@ -133,6 +133,24 @@
                         View Product
                     </a>
 
+                    {% if user.is_authenticated %}
+
+                        {% if product in user.wishlist.products.all %}
+
+                            <a href="{% url 'remove_from_wishlist' product.pk %}">
+                                💔 Remove from Wishlist
+                            </a>
+
+                        {% else %}
+
+                            <a href="{% url 'add_to_wishlist' product.pk %}">
+                                ❤️ Add to Wishlist
+                            </a>
+
+                        {% endif %}
+
+                    {% endif %}
+
                 </article>
 
             {% endfor %}
